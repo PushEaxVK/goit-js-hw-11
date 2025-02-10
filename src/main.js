@@ -21,6 +21,7 @@ function handleFormSubmit(event) {
     showErrorMessage('Enter some value');
     return;
   }
+  renderAllCards(refs.gallery, []);
   refs.loader.style.display = 'block';
   searchImages(value)
     .then(data => {
