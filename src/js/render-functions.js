@@ -1,6 +1,11 @@
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 
+import SimpleLightbox from 'simplelightbox';
+import 'simplelightbox/dist/simple-lightbox.min.css';
+
+const litebox = new SimpleLightbox('.gallery-list a');
+
 export const showErrorMessage = message => {
   iziToast.error({
     message,
@@ -12,6 +17,7 @@ export const showErrorMessage = message => {
 export function renderAllCards(element, images) {
   const markup = createAllCardsMarkup(images);
   element.innerHTML = markup;
+  litebox.refresh();
 }
 
 export function createAllCardsMarkup(images) {
@@ -21,6 +27,7 @@ export function createAllCardsMarkup(images) {
 export function createCardMarkup(image) {
   console.log(image);
   return `<li class="gallery-item">
+            <a href="${image.largeImageURL}" class="gallery-link">
               <img
                 class="card-image"
                 src="${image.webformatURL}"
@@ -45,5 +52,6 @@ export function createCardMarkup(image) {
                   <p class="element-value">${image.downloads}</p>
                 </div>
               </div>
-            </li>`;
+            </a>
+          </li>`;
 }
