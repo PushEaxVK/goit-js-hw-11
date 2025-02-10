@@ -15,12 +15,11 @@ export function searchImages(query) {
     q: query,
     image_type: 'photo',
     orientation: 'horizontal',
-    safesearch: 'true',
+    safesearch: 'false',
   };
   return axios
     .get(BASE_URL, { params })
     .then(response => {
-      // console.log(response);
       return response.data.hits;
     })
     .catch(error => {
