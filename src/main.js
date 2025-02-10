@@ -8,9 +8,11 @@ const refs = {
   input: document.querySelector('.form-input'),
   button: document.querySelector('.form-button'),
   gallery: document.querySelector('.gallery-list'),
+  loader: document.querySelector('.loader'),
 };
 
 refs.form.addEventListener('submit', handleFormSubmit);
+refs.loader.style.display = 'none';
 
 function handleFormSubmit(event) {
   event.preventDefault();
@@ -19,8 +21,10 @@ function handleFormSubmit(event) {
     showErrorMessage('Enter some value');
     return;
   }
+  refs.loader.style.display = 'block';
   searchImages(value)
     .then(data => {
+      refs.loader.style.display = 'none';
       if (data.length === 0) {
         showErrorMessage(
           'Sorry, there are no images matching your search query. Please try again!'
@@ -30,6 +34,7 @@ function handleFormSubmit(event) {
       }
     })
     .catch(error => {
+      refs.loader.style.display = 'none';
       showErrorMessage('Sorry, something went wrong. Please try again!');
     });
 }
